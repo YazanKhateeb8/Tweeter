@@ -13,15 +13,15 @@ const Tweeter = function () {
       text: "Secound post !",
       id: "p2",
       comments: [
-        { id: "c4", text: "Don't wory second poster, you'll be first one day."},
+        {
+          id: "c4",
+          text: "Don't wory second poster, you'll be first one day.",
+        },
         { id: "c5", text: "Yeah, believe in yourself!" },
         { id: "c6", text: "Haha second place what a joke." },
       ],
     },
   ];
-
-
-
 
   let postIdCounter = _posts.length;
   let commentIdCounter = 6;
@@ -29,86 +29,46 @@ const Tweeter = function () {
 
 
 
-
-
-
-
-
-/**
- * 
- * @returns Array Posts
- */
+  /**
+   *
+   * @returns Array Posts
+   */
   const getPosts = function () {
     return _posts;
   };
 
-  
 
 
-/**
- * 
- * @param {Adding Post to Array _posts} text 
- */
-  const addPost = function (text) {
-    
+
+  /**
+   *
+   * @param {Adding Post to Array _posts} post
+   */
+  const addPost = function (post) {
     postIdCounter++;
 
     const newPost = {
-
-            text: text,
-            id: "p" + postIdCounter,
-            comments: [],
+      text: post,
+      id: "p" + postIdCounter,
+      comments: [],
     };
 
-        _posts.push(newPost);
+    _posts.push(newPost);
   };
 
 
 
-
-
-/**
- * 
- * @param {id the post want to remove} postId 
- * Remove Post from Array _posts
- */
+  /**
+   *
+   * @param {id the post want to remove} postId
+   * Remove Post from Array _posts
+   */
   const removePost = function (postId) {
-
-        for (let key in _posts) {
-
-            if (_posts[key].id == postId) {
-                    _posts.splice(key, 1);
-            }
-
-        }
-  };
-
-
-
-
-
-
-
-/**
- * 
- * @param {id the post} postID 
- * @param {the comment want to add} text 
- * Adding comment to array post.comments
- */
-  const addComment = function (postID, text) {
-    
-        commentIdCounter++;
-
-            for (let key of _posts) {
-
-                if (key.id == postID) {
-
-                        key.comments.push({
-                        id: "c" + commentIdCounter,
-                        text: text,
-                        });
-                }
-            }
+    for (let key in _posts) {
+      if (_posts[key].id == postId) {
+        _posts.splice(key, 1);
+      }
+    }
   };
 
 
@@ -117,28 +77,21 @@ const Tweeter = function () {
 
 
   /**
-   * 
-   * @param {id the post} postID 
-   * @param { id comment want to remove} commentID 
-   * Remove Comment from array _post.comments
+   *
+   * @param {id the post} postID
+   * @param {the comment want to add} comment
+   * Adding comment to array post.comments
    */
-
-  const removeComment = function (postID, commentID) {
+  const addComment = function (postID, comment) {
+    commentIdCounter++;
 
     for (let key of _posts) {
-
-        if (key.id == postID) {
-            
-            let count = 0;
-            for (let val of key.comments) {
-
-                    if (val.id == commentID) {
-                        key.comments.splice(count, 1);
-                    }
-
-                count++;
-            }
-        }
+      if (key.id == postID) {
+        key.comments.push({
+          id: "c" + commentIdCounter,
+          text: comment,
+        });
+      }
     }
   };
 
@@ -146,8 +99,31 @@ const Tweeter = function () {
 
 
 
-  return {
+  /**
+   *
+   * @param {id the post} postID
+   * @param { id comment want to remove} commentID
+   * Remove Comment from array _post.comments
+   */
 
+  const removeComment = function (postID, commentID) {
+    for (let key of _posts) {
+      if (key.id == postID) {
+        let count = 0;
+        for (let val of key.comments) {
+          if (val.id == commentID) {
+            key.comments.splice(count, 1);
+          }
+
+          count++;
+        }
+      }
+    }
+  };
+
+
+
+  return {
     postIdCounter: postIdCounter,
     commentIdCounter: commentIdCounter,
     getPosts: getPosts,
@@ -155,6 +131,5 @@ const Tweeter = function () {
     removePost: removePost,
     addComment: addComment,
     removeComment: removeComment,
-
   };
 };
