@@ -13,10 +13,7 @@ const Tweeter = function () {
       text: "Secound post !",
       id: "p2",
       comments: [
-        {
-          id: "c4",
-          text: "Don't wory second poster, you'll be first one day.",
-        },
+        {id: "c4", text: "Don't wory second poster, you'll be first one day."},
         { id: "c5", text: "Yeah, believe in yourself!" },
         { id: "c6", text: "Haha second place what a joke." },
       ],
@@ -45,10 +42,10 @@ const Tweeter = function () {
    * @param {Adding Post to Array _posts} post
    */
   const addPost = function (post) {
-    
+    _postIdCounter++
     const newPost = {
       text: post,
-      id: "p" + _postIdCounter++,
+      id: "p" + _postIdCounter,
       comments: [],
     };
 
@@ -83,11 +80,11 @@ const Tweeter = function () {
    * Adding comment to array post.comments
    */
   const addComment = function (postID, comment) {
-    
+    _commentIdCounter++
     for (let key of _posts) {
       if (key.id == postID) {
         key.comments.push({
-          id: "c" + _commentIdCounter++,
+          id: "c" + _commentIdCounter,
           text: comment,
         });
       }
@@ -106,7 +103,7 @@ const Tweeter = function () {
    */
 
   const removeComment = function (postID, commentID) {
-    
+
     for (let key of _posts) {
       if (key.id == postID) {
         let count = 0;
