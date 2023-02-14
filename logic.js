@@ -46,7 +46,6 @@ const Tweeter = function () {
    */
   const addPost = function (post) {
     
-
     const newPost = {
       text: post,
       id: "p" + _postIdCounter++,
@@ -64,6 +63,7 @@ const Tweeter = function () {
    * Remove Post from Array _posts
    */
   const removePost = function (postId) {
+
     for (let key in _posts) {
       if (_posts[key].id == postId) {
         _posts.splice(key, 1);
@@ -84,7 +84,6 @@ const Tweeter = function () {
    */
   const addComment = function (postID, comment) {
     
-
     for (let key of _posts) {
       if (key.id == postID) {
         key.comments.push({
@@ -107,6 +106,7 @@ const Tweeter = function () {
    */
 
   const removeComment = function (postID, commentID) {
+    
     for (let key of _posts) {
       if (key.id == postID) {
         let count = 0;
